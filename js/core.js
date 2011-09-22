@@ -139,8 +139,8 @@ function geocodeLocationNames(dataHash, callback) {
 					console.log("looking lat/long for up "+name);
 					geocoder.geocode({"address": name}, function(results, status) {
 							if (status == google.maps.GeocoderStatus.OK) {
-								var x = jsonPath(results, "*..location.lat");
-								var y = jsonPath(results, "*..location.lng");
+								var x = jsonPath(results, "*..location.Ja");
+								var y = jsonPath(results, "*..location.Ka");
 								if (x && y) {
 									x = x.first(); y = y.first();
 									geoCache[name] = { x: x, y: y };
