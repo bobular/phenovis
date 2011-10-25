@@ -139,10 +139,14 @@ function geocodeLocationNames(dataHash, callback) {
 					console.log("looking lat/long for up "+name);
 					geocoder.geocode({"address": name}, function(results, status) {
 							if (status == google.maps.GeocoderStatus.OK) {
-								var x = jsonPath(results, "*..location.Ja");
-								var y = jsonPath(results, "*..location.Ka");
-								if (x && y) {
-									x = x.first(); y = y.first();
+								// this keeps breaking so let's use the methods which
+								// I assume are more stable
+								var x = results[0].geometry.location.lat();
+								// var x = jsonPath(results, "*..location.Ja");
+								var y = results[0].geometry.location.lng();
+								//var y = jsonPath(results, "*..location.Ka");
+								if (x != null && y != null) {
+									// x = x.first(); y = y.first();
 									geoCache[name] = { x: x, y: y };
 									h.x = x; h.y = y;
 								}
